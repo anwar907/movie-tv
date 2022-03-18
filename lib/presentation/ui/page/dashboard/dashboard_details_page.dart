@@ -4,12 +4,12 @@ import 'package:movie_tv/data/models/movie_models.dart';
 import 'package:movie_tv/presentation/ui/widget/ratting_start_widget.dart';
 
 class DashboardDetailsPage extends StatelessWidget {
-  final MovieModels movieModels;
+  final MovieModels? movieModels;
   const DashboardDetailsPage({this.movieModels});
 
   @override
   Widget build(BuildContext context) {
-    DateTime dateTime = movieModels.releaseDate;
+    DateTime dateTime = movieModels!.releaseDate!;
     String dateformat = DateFormat.yMMMd('en_US').format(dateTime);
     return Scaffold(
       body: Stack(
@@ -30,7 +30,7 @@ class DashboardDetailsPage extends StatelessWidget {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        "https://image.tmdb.org/t/p/w500/${movieModels.backdropPath}"))),
+                        "https://image.tmdb.org/t/p/w500/${movieModels!.backdropPath}"))),
           )),
           SafeArea(
               child: ListView(
@@ -47,7 +47,7 @@ class DashboardDetailsPage extends StatelessWidget {
                     child: Wrap(
                       children: [
                         Text(
-                          movieModels.title,
+                          movieModels!.title!,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
@@ -55,8 +55,8 @@ class DashboardDetailsPage extends StatelessWidget {
                           height: 6,
                         ),
                         RatingStarts(
-                            rate: movieModels.voteAverage,
-                            totalRate: movieModels.voteCount)
+                            rate: movieModels!.voteAverage,
+                            totalRate: movieModels!.voteCount)
                       ],
                     ),
                   ),
@@ -70,7 +70,7 @@ class DashboardDetailsPage extends StatelessWidget {
                       )
                     ]),
                     child: Text(
-                      movieModels.overview,
+                      movieModels!.overview!,
                       maxLines: 9,
                     ),
                   ),
@@ -99,7 +99,7 @@ class DashboardDetailsPage extends StatelessWidget {
                             Icons.favorite,
                             color: Colors.red,
                           ),
-                          Text("${movieModels.popularity}")
+                          Text("${movieModels!.popularity}")
                         ],
                       ),
                       Column(
@@ -109,7 +109,7 @@ class DashboardDetailsPage extends StatelessWidget {
                             color: Colors.lightBlue,
                           ),
                           Row(
-                              children: movieModels.genreIds
+                              children: movieModels!.genreIds!
                                   .map((e) => Text("$e,"))
                                   .toList())
                         ],

@@ -7,19 +7,19 @@ part 'now_playing_event.dart';
 part 'now_playing_state.dart';
 
 class NowPlayingBloc extends Bloc<NowPlayingEvent, NowPlayingState> {
-  @override
-  // TODO: implement initialState
-  NowPlayingState get initialState => NowPlayingInitialState();
+  NowPlayingBloc({this.remoteDataSource}) : super(NowPlayingLoadingState()) {
+    on<NowPlayingStartEvent>(_onStarted);
+  }
+  final RemoteDataSource? remoteDataSource;
 
-  @override
-  Stream<NowPlayingState> mapEventToState(
-      NowPlayingEvent event) async* {
-    if (event is NowPlayingStartEvent) {
-      var dataPlaying = await RemoteDataSource().getNowPlaying();
+  void _onStarted(NowPlayingEvent event, Emitter<NowPlayingState> emit) async {
+    emit(NowPlayingLoadingState());
 
-      yield NowPlayingLoadedState(dataPlaying);
-    } else {
-      yield NowPlayingFailureState(message: "Network Error");
+    try {
+      final dataNowPlay = await remoteDataSource!.getNowPlaying();
+      emit(NowPlayingLoadedState(dataNowPlay));
+    } catch (e) {
+      emit(NowPlayingFailureState(message: e.toString()));
     }
   }
 }

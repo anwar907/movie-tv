@@ -7,13 +7,12 @@ import 'package:movie_tv/data/models/movie_models.dart';
 import 'package:movie_tv/data/models/tv_series_models.dart';
 
 class RemoteDataSource {
-  Future<List<MovieModels>> getNowPlaying() async {
+  Future<List<MovieModels>?> getNowPlaying() async {
     List<MovieModels> listMovie = [];
     try {
       var response =
           await http.get(Uri.parse(Urls.baseurl + Urls.getNowPlaying));
       var result = jsonDecode(response.body);
-
       if (result == '') {
         return null;
       } else {
@@ -23,11 +22,11 @@ class RemoteDataSource {
       }
       return listMovie;
     } catch (e) {
-      throw ConnectionFailure(e);
+      throw ConnectionFailure(e.toString());
     }
   }
 
-  Future<List<MovieModels>> getUcomming() async {
+  Future<List<MovieModels>?> getUcomming() async {
     List<MovieModels> list = [];
     try {
       var response = await http.get(Uri.parse(Urls.baseurl + Urls.getUpcoming));
@@ -42,11 +41,11 @@ class RemoteDataSource {
       }
       return list;
     } catch (e) {
-      throw ConnectionFailure(e);
+      throw ConnectionFailure(e.toString());
     }
   }
 
-  Future<List<MovieModels>> getPopular() async {
+  Future<List<MovieModels>?> getPopular() async {
     List<MovieModels> list = [];
     try {
       var response =
@@ -62,11 +61,11 @@ class RemoteDataSource {
       }
       return list;
     } catch (e) {
-      throw ConnectionFailure(e);
+      throw ConnectionFailure(e.toString());
     }
   }
 
-  Future<List<TvSeriesModels>> getTvPopular() async {
+  Future<List<TvSeriesModels>?> getTvPopular() async {
     List<TvSeriesModels> list = [];
 
     try {
@@ -82,11 +81,11 @@ class RemoteDataSource {
       }
       return list;
     } catch (e) {
-      throw ConnectionFailure(e);
+      throw ConnectionFailure(e.toString());
     }
   }
 
-  Future<List<TvSeriesModels>> getTvOnAir() async {
+  Future<List<TvSeriesModels>?> getTvOnAir() async {
     List<TvSeriesModels> list = [];
 
     try {
@@ -101,7 +100,7 @@ class RemoteDataSource {
       }
       return list;
     } catch (e) {
-      throw ConnectionFailure(e);
+      throw ConnectionFailure(e.toString());
     }
   }
 }

@@ -8,11 +8,11 @@ class UpcommingInitialState extends UpcommingState {}
 class UpcommingLoadingState extends UpcommingState {}
 
 class UpcommingLoadedState extends UpcommingState {
-  final List<MovieModels> movieUpcomming;
+  final List<MovieModels>? movieUpcomming;
   UpcommingLoadedState(this.movieUpcomming);
 }
 
 class UpcommingFailureState extends UpcommingState {
-  final String message;
+  final String? message;
   UpcommingFailureState({this.message});
 }

@@ -8,7 +8,7 @@ class CustomCardMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime dateTime = movieModels.releaseDate;
+    DateTime dateTime = movieModels.releaseDate!;
     String dateformat = DateFormat.yMMMd('en_US').format(dateTime);
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -41,7 +41,7 @@ class CustomCardMovie extends StatelessWidget {
           SizedBox(
             width: 90,
             child: Text(
-              movieModels.title,
+              movieModels.title!,
               style: TextStyle(fontWeight: FontWeight.bold),
               maxLines: 2,
               softWrap: true,

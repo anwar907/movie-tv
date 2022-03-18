@@ -8,11 +8,11 @@ class TvOnAirInitialState extends TvOnAirState {}
 class TvOnAirLoadingState extends TvOnAirState {}
 
 class TvOnAirLoadedState extends TvOnAirState {
-  final List<TvSeriesModels> tvMovie;
+  final List<TvSeriesModels>? tvMovie;
   TvOnAirLoadedState(this.tvMovie);
 }
 
 class TvOnAirErrorState extends TvOnAirState {
-  final String message;
+  final String? message;
   TvOnAirErrorState({this.message});
 }

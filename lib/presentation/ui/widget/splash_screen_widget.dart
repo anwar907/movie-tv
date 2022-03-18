@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:movie_tv/data/datasource/remote_data_source.dart';
 import 'package:movie_tv/presentation/bloc/dashboard/nowplaying/now_playing_bloc.dart';
 import 'package:movie_tv/presentation/bloc/dashboard/popular/popular_bloc.dart';
 import 'package:movie_tv/presentation/bloc/dashboard/upcomming/upcomming_bloc.dart';
@@ -17,6 +18,7 @@ class SplashScreenWidget extends StatefulWidget {
 }
 
 class _SplashScreenWidgetState extends State<SplashScreenWidget> {
+  final RemoteDataSource remoteDataSource = RemoteDataSource();
   @override
   void initState() {
     Timer(
@@ -25,15 +27,25 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
             context,
             MultiBlocProvider(providers: [
               BlocProvider<UpcommingBloc>(
-                  create: (BuildContext context) => UpcommingBloc()),
+                  create: (BuildContext context) =>
+                      UpcommingBloc(remoteDataSource: remoteDataSource)
+                        ..add(UpcommingStartEvent())),
               BlocProvider<PopularBloc>(
-                  create: (BuildContext context) => PopularBloc()),
+                  create: (BuildContext context) =>
+                      PopularBloc(remoteDataSource: remoteDataSource)
+                        ..add(PopularStartEvent())),
               BlocProvider<NowPlayingBloc>(
-                  create: (BuildContext context) => NowPlayingBloc()),
+                  create: (BuildContext context) =>
+                      NowPlayingBloc(remoteDataSource: remoteDataSource)
+                        ..add(NowPlayingStartEvent())),
               BlocProvider<TvPopularBloc>(
-                  create: (BuildContext context) => TvPopularBloc()),
+                  create: (BuildContext context) =>
+                      TvPopularBloc(remoteDataSource: remoteDataSource)
+                        ..add(TvPopularStartEvent())),
               BlocProvider<TvOnAirBloc>(
-                  create: (BuildContext context) => TvOnAirBloc())
+                  create: (BuildContext context) =>
+                      TvOnAirBloc(remoteDataSource: remoteDataSource)
+                        ..add(TvOnAirStartEvent()))
             ], child: MenuNavigationPage())));
     super.initState();
   }

@@ -7,23 +7,20 @@ part 'tv_popular_event.dart';
 part 'tv_popular_state.dart';
 
 class TvPopularBloc extends Bloc<TvPopularEvent, TvPopularState> {
-  @override
-  // TODO: implement initialState
-  TvPopularState get initialState => TvPopularInitialState();
+  TvPopularBloc({this.remoteDataSource}) : super(TvPopularLoadingState()) {
+    on<TvPopularStartEvent>(_getTvPopular);
+  }
 
-  @override
-  Stream<TvPopularState> mapEventToState(TvPopularEvent event) async* {
-    if (event is TvPopularStartEvent) {
-      var dataTvPopular = await RemoteDataSource().getTvPopular();
+  final RemoteDataSource? remoteDataSource;
 
-      yield TvPopularLoadedState(dataTvPopular);
-    } else if (event is TvPopularDetailsEvent) {
-      var dataTvPopular = await RemoteDataSource().getTvPopular();
-      dataTvPopular.map((e) {
-        return TvPopularDetailsState(e);
-      });
-    } else {
-      yield TvPopularErrorState(message: "Network Error");
+  void _getTvPopular(TvPopularEvent event, Emitter<TvPopularState> emit) async {
+    emit(TvPopularLoadingState());
+    try {
+      final dataTvPopular = await remoteDataSource!.getTvPopular();
+      print(dataTvPopular);
+      emit(TvPopularLoadedState(dataTvPopular));
+    } catch (e) {
+      emit(TvPopularErrorState(message: e.toString()));
     }
   }
 }

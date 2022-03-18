@@ -2,20 +2,20 @@ import 'package:equatable/equatable.dart';
 import 'package:movie_tv/data/models/movie_models.dart';
 
 class Movie extends Equatable {
-  final bool adult;
-  final String backgroundPath;
-  final List<int> genreId;
-  final int id;
-  final OriginalLanguage originalLanguage;
-  final String originalTitle;
-  final String overview;
-  final String popularity;
-  final String posterPath;
-  final DateTime releseDate;
-  final String titile;
-  final bool video;
-  final double voteAverage;
-  final int voteCount;
+  final bool? adult;
+  final String? backgroundPath;
+  final List<int>? genreId;
+  final int? id;
+  final OriginalLanguage? originalLanguage;
+  final String? originalTitle;
+  final String? overview;
+  final String? popularity;
+  final String? posterPath;
+  final DateTime? releseDate;
+  final String? titile;
+  final bool? video;
+  final double? voteAverage;
+  final int? voteCount;
 
   Movie(
       {this.adult,
@@ -34,7 +34,7 @@ class Movie extends Equatable {
       this.voteCount});
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         adult,
         backgroundPath,
         genreId,

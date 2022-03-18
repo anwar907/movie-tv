@@ -7,18 +7,20 @@ part 'tvonair_event.dart';
 part 'tvonair_state.dart';
 
 class TvOnAirBloc extends Bloc<TvOnAirEvent, TvOnAirState> {
-  @override
-  // TODO: implement initialState
-  TvOnAirState get initialState => TvOnAirInitialState();
+  TvOnAirBloc({this.remoteDataSource}) : super(TvOnAirLoadingState()) {
+    on<TvOnAirStartEvent>(_getTvOnAir);
+  }
 
-  @override
-  Stream<TvOnAirState> mapEventToState(TvOnAirEvent event) async* {
-    if (event is TvOnAirStartEvent) {
-      var dataOnAir = await RemoteDataSource().getTvOnAir();
+  final RemoteDataSource? remoteDataSource;
 
-      yield TvOnAirLoadedState(dataOnAir);
-    } else {
-      yield TvOnAirErrorState(message: "Network Error");
+  void _getTvOnAir(TvOnAirEvent event, Emitter<TvOnAirState> emit) async {
+    emit(TvOnAirLoadingState());
+
+    try {
+      final dataTvOnAir = await remoteDataSource!.getTvOnAir();
+      emit(TvOnAirLoadedState(dataTvOnAir));
+    } catch (e) {
+      emit(TvOnAirErrorState(message: e.toString()));
     }
   }
 }

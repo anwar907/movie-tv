@@ -7,18 +7,20 @@ part 'popular_event.dart';
 part 'popular_state.dart';
 
 class PopularBloc extends Bloc<PopularEvent, PopularState> {
-  @override
-  // TODO: implement initialState
-  PopularState get initialState => PopularInitialState();
+  PopularBloc({this.remoteDataSource}) : super(PopularLoadingState()) {
+    on<PopularStartEvent>(_getDataPopular);
+  }
 
-  @override
-  Stream<PopularState> mapEventToState(PopularEvent event) async* {
-    if (event is PopularStartEvent) {
-      var dataPopular = await RemoteDataSource().getPopular();
+  final RemoteDataSource? remoteDataSource;
 
-      yield PopularLoadedState(dataPopular);
-    } else {
-      yield PopularFailureState(message: "Network Error");
+  void _getDataPopular(PopularEvent event, Emitter<PopularState> emit) async {
+    emit(PopularLoadingState());
+
+    try {
+      final dataMoviePopular = await remoteDataSource!.getPopular();
+      emit(PopularLoadedState(dataMoviePopular));
+    } catch (e) {
+      emit(PopularFailureState(message: e.toString()));
     }
   }
 }

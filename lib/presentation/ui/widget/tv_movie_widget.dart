@@ -25,7 +25,7 @@ class CustomTvMovieWidget extends StatelessWidget {
           SizedBox(
             width: 70,
             child: Text(
-              movieModels.name,
+              movieModels.name!,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
               maxLines: 1,
               softWrap: true,

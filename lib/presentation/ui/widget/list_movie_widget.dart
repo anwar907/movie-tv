@@ -31,14 +31,14 @@ class CustomListMovie extends StatelessWidget {
         ),
       ),
       title: Text(
-        movieModels.title,
+        movieModels.title!,
         style: TextStyle(fontWeight: FontWeight.bold),
         maxLines: 2,
         softWrap: true,
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
-        movieModels.overview,
+        movieModels.overview!,
         style: TextStyle(fontSize: 12),
       ),
     );

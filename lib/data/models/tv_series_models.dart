@@ -1,17 +1,17 @@
 class TvSeriesModels {
-  String backdropPath;
-  String firstAirDate;
-  List<int> genreIds;
-  int id;
-  String name;
-  List<String> originCountry;
-  String originalLanguage;
-  String originalName;
-  String overview;
-  double popularity;
-  String posterPath;
-  double voteAverage;
-  int voteCount;
+  String? backdropPath;
+  String? firstAirDate;
+  List<int>? genreIds;
+  int? id;
+  String? name;
+  List<String>? originCountry;
+  String? originalLanguage;
+  String? originalName;
+  String? overview;
+  double? popularity;
+  String? posterPath;
+  double? voteAverage;
+  int? voteCount;
 
   TvSeriesModels(
       {this.backdropPath,
@@ -46,10 +46,10 @@ class TvSeriesModels {
   Map<String, dynamic> toJson() => {
         "backdrop_path": backdropPath,
         "first_air_date": firstAirDate,
-        "genre_ids": List<dynamic>.from(genreIds.map((e) => e)),
+        "genre_ids": List<dynamic>.from(genreIds!.map((e) => e)),
         "id": id,
         "name": name,
-        "origin_country": List<dynamic>.from(originCountry.map((e) => e)),
+        "origin_country": List<dynamic>.from(originCountry!.map((e) => e)),
         "original_language": originalLanguage,
         "original_name": originalName,
         "overview": overview,

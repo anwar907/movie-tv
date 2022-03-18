@@ -4,7 +4,7 @@ import 'package:movie_tv/presentation/ui/page/profile/profile_page.dart';
 import 'package:movie_tv/presentation/ui/page/tv_series/tv_series_page.dart';
 
 class MenuNavigationPage extends StatefulWidget {
-  const MenuNavigationPage({Key key}) : super(key: key);
+  const MenuNavigationPage({Key? key}) : super(key: key);
 
   @override
   State<MenuNavigationPage> createState() => _MenuNavigationPageState();

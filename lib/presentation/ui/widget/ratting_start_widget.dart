@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class RatingStarts extends StatelessWidget {
-  final double rate;
-  final int totalRate;
+  final double? rate;
+  final int? totalRate;
   RatingStarts({this.rate, this.totalRate});
 
   @override
   Widget build(BuildContext context) {
-    int numberOfStar = rate.round();
+    int numberOfStar = rate!.round();
     return Row(
       children: List<Widget>.generate(
               1,

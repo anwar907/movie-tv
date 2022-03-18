@@ -8,11 +8,11 @@ class NowPlayingInitialState extends NowPlayingState {}
 class NowPlayingLoadingState extends NowPlayingState {}
 
 class NowPlayingLoadedState extends NowPlayingState {
-  final List<MovieModels> movieNowPlaying;
+  final List<MovieModels>? movieNowPlaying;
   NowPlayingLoadedState(this.movieNowPlaying);
 }
 
 class NowPlayingFailureState extends NowPlayingState {
-  final String message;
+  final String? message;
   NowPlayingFailureState({this.message});
 }

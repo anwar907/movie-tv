@@ -8,16 +8,11 @@ class TvPopularInitialState extends TvPopularState {}
 class TvPopularLoadingState extends TvPopularState {}
 
 class TvPopularLoadedState extends TvPopularState {
-  final List<TvSeriesModels> tvMovie;
+  final List<TvSeriesModels>? tvMovie;
   TvPopularLoadedState(this.tvMovie);
 }
 
-class TvPopularDetailsState extends TvPopularState {
-  final TvSeriesModels tvSeriesModels;
-  TvPopularDetailsState(this.tvSeriesModels);
-}
-
 class TvPopularErrorState extends TvPopularState {
-  final String message;
+  final String? message;
   TvPopularErrorState({this.message});
 }

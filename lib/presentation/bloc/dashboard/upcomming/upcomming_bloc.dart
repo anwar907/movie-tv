@@ -7,18 +7,20 @@ part 'upcomming_event.dart';
 part 'upcomming_state.dart';
 
 class UpcommingBloc extends Bloc<UpcommingEvent, UpcommingState> {
-  @override
-  // TODO: implement initialState
-  UpcommingState get initialState => UpcommingInitialState();
+  UpcommingBloc({this.remoteDataSource}) : super(UpcommingLoadingState()) {
+    on<UpcommingStartEvent>(_getDataUpcomming);
+  }
 
-  @override
-  Stream<UpcommingState> mapEventToState(UpcommingEvent event) async* {
-    if (event is UpcommingStartEvent) {
-      var dataUpcomming = await RemoteDataSource().getUcomming();
+  final RemoteDataSource? remoteDataSource;
+  void _getDataUpcomming(
+      UpcommingEvent event, Emitter<UpcommingState> emit) async {
+    emit(UpcommingLoadingState());
 
-      yield UpcommingLoadedState(dataUpcomming);
-    } else {
-      yield UpcommingFailureState(message: "Network Error");
+    try {
+      final dataUpcomming = await remoteDataSource!.getUcomming();
+      emit(UpcommingLoadedState(dataUpcomming));
+    } catch (e) {
+      emit(UpcommingFailureState(message: e.toString()));
     }
   }
 }

@@ -3,7 +3,7 @@ import 'package:movie_tv/data/models/tv_series_models.dart';
 import 'package:movie_tv/presentation/ui/widget/ratting_start_widget.dart';
 
 class TvDetailsMovie extends StatelessWidget {
-  final TvSeriesModels movieModels;
+  final TvSeriesModels? movieModels;
   const TvDetailsMovie({this.movieModels});
 
   @override
@@ -27,7 +27,7 @@ class TvDetailsMovie extends StatelessWidget {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        "https://image.tmdb.org/t/p/w500/${movieModels.backdropPath}"))),
+                        "https://image.tmdb.org/t/p/w500/${movieModels!.backdropPath}"))),
           )),
           SafeArea(
               child: ListView(
@@ -44,7 +44,7 @@ class TvDetailsMovie extends StatelessWidget {
                     child: Wrap(
                       children: [
                         Text(
-                          movieModels.name,
+                          movieModels!.name!,
                           maxLines: 1,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
@@ -53,8 +53,8 @@ class TvDetailsMovie extends StatelessWidget {
                           height: 6,
                         ),
                         RatingStarts(
-                            rate: movieModels.voteAverage,
-                            totalRate: movieModels.voteCount)
+                            rate: movieModels!.voteAverage,
+                            totalRate: movieModels!.voteCount)
                       ],
                     ),
                   ),
@@ -68,7 +68,7 @@ class TvDetailsMovie extends StatelessWidget {
                       )
                     ]),
                     child: Text(
-                      movieModels.overview,
+                      movieModels!.overview!,
                       maxLines: 9,
                     ),
                   ),
@@ -97,7 +97,7 @@ class TvDetailsMovie extends StatelessWidget {
                             Icons.favorite,
                             color: Colors.red,
                           ),
-                          Text("${movieModels.popularity}")
+                          Text("${movieModels!.popularity}")
                         ],
                       ),
                       Column(
@@ -106,13 +106,13 @@ class TvDetailsMovie extends StatelessWidget {
                             Icons.language,
                             color: Colors.lightBlue,
                           ),
-                          Text(movieModels.originCountry[0])
+                          Text(movieModels!.originCountry![0])
                         ],
                       ),
                       Column(
                         children: [
                           Icon(Icons.date_range),
-                          Text(movieModels.firstAirDate)
+                          Text(movieModels!.firstAirDate!)
                         ],
                       ),
                     ],

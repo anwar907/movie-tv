@@ -16,20 +16,20 @@ class MovieModels {
     this.voteCount,
   });
 
-  bool adult;
-  String backdropPath;
-  List<int> genreIds;
-  int id;
-  OriginalLanguage originalLanguage;
-  String originalTitle;
-  String overview;
-  double popularity;
-  String posterPath;
-  DateTime releaseDate;
-  String title;
-  bool video;
-  double voteAverage;
-  int voteCount;
+  bool? adult;
+  String? backdropPath;
+  List<int>? genreIds;
+  int? id;
+  OriginalLanguage? originalLanguage;
+  String? originalTitle;
+  String? overview;
+  double? popularity;
+  String? posterPath;
+  DateTime? releaseDate;
+  String? title;
+  bool? video;
+  double? voteAverage;
+  int? voteCount;
 
   factory MovieModels.fromJson(Map<String, dynamic> json) => MovieModels(
         adult: json["adult"],
@@ -51,15 +51,15 @@ class MovieModels {
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
-        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+        "genre_ids": List<dynamic>.from(genreIds!.map((x) => x)),
         "id": id,
-        "original_language": originalLanguageValues.reverse[originalLanguage],
+        "original_language": originalLanguageValues.reverse![originalLanguage!],
         "original_title": originalTitle,
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
         "release_date":
-            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
+            "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}",
         "title": title,
         "video": video,
         "vote_average": voteAverage,
@@ -77,11 +77,11 @@ final originalLanguageValues = EnumValues({
 
 class EnumValues<T> {
   Map<String, T> map;
-  Map<T, String> reverseMap;
+  Map<T, String>? reverseMap;
 
   EnumValues(this.map);
 
-  Map<T, String> get reverse {
+  Map<T, String>? get reverse {
     if (reverseMap == null) {
       reverseMap = map.map((k, v) => new MapEntry(v, k));
     }
